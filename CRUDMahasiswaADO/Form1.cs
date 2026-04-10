@@ -42,5 +42,10 @@ namespace CRUDMahasiswaADO
                 MessageBox.Show("Koneksi Gagal" + ex.Message);
             }
         }
+
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+            ConnectDatabase();
+        }
     }
 }
