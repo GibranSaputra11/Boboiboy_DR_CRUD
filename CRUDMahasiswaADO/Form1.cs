@@ -25,8 +25,8 @@ namespace CRUDMahasiswaADO
         private void Form1_Load(object sender, EventArgs e)
         {
             cmbJK.Items.Clear();
-            cmbJK.Items.Add("Laki-laki");
-            cmbJK.Items.Add("Perempuan");
+            cmbJK.Items.Add("L");
+            cmbJK.Items.Add("P");
 
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.MultiSelect = false;
@@ -63,7 +63,7 @@ namespace CRUDMahasiswaADO
         {
             try
             {
-                if (conn.State == ConnectionState.Closed)
+                if (conn.State == System.Data.ConnectionState.Closed)
                 {
                     conn.Open();
                 }
