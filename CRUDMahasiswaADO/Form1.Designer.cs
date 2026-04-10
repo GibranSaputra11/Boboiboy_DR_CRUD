@@ -125,15 +125,16 @@
             // 
             // txtAlamat
             // 
-            this.txtAlamat.Location = new System.Drawing.Point(146, 206);
+            this.txtAlamat.Location = new System.Drawing.Point(147, 206);
+            this.txtAlamat.Multiline = true;
             this.txtAlamat.Name = "txtAlamat";
-            this.txtAlamat.Size = new System.Drawing.Size(224, 22);
+            this.txtAlamat.Size = new System.Drawing.Size(224, 77);
             this.txtAlamat.TabIndex = 9;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(31, 249);
+            this.label6.Location = new System.Drawing.Point(31, 302);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(74, 16);
             this.label6.TabIndex = 10;
@@ -141,7 +142,7 @@
             // 
             // txtKodeProdi
             // 
-            this.txtKodeProdi.Location = new System.Drawing.Point(146, 249);
+            this.txtKodeProdi.Location = new System.Drawing.Point(146, 302);
             this.txtKodeProdi.Name = "txtKodeProdi";
             this.txtKodeProdi.Size = new System.Drawing.Size(187, 22);
             this.txtKodeProdi.TabIndex = 11;
@@ -149,11 +150,11 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(34, 299);
+            this.dataGridView1.Location = new System.Drawing.Point(34, 366);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(730, 167);
+            this.dataGridView1.Size = new System.Drawing.Size(730, 253);
             this.dataGridView1.TabIndex = 12;
             // 
             // btnConnect
@@ -174,6 +175,7 @@
             this.btnLoad.TabIndex = 14;
             this.btnLoad.Text = "Menampilkan Data";
             this.btnLoad.UseVisualStyleBackColor = true;
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
             // btnAdd
             // 
@@ -206,7 +208,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 497);
+            this.ClientSize = new System.Drawing.Size(800, 658);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnAdd);
