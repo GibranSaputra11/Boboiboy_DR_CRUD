@@ -43,7 +43,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnConnect = new System.Windows.Forms.Button();
             this.btnLoad = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnInsert = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -177,14 +177,15 @@
             this.btnLoad.UseVisualStyleBackColor = true;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
-            // btnAdd
+            // btnInsert
             // 
-            this.btnAdd.Location = new System.Drawing.Point(435, 116);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(145, 28);
-            this.btnAdd.TabIndex = 15;
-            this.btnAdd.Text = "Menambah Data";
-            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnInsert.Location = new System.Drawing.Point(435, 116);
+            this.btnInsert.Name = "btnInsert";
+            this.btnInsert.Size = new System.Drawing.Size(145, 28);
+            this.btnInsert.TabIndex = 15;
+            this.btnInsert.Text = "Menambah Data";
+            this.btnInsert.UseVisualStyleBackColor = true;
+            this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
             // 
             // btnUpdate
             // 
@@ -211,7 +212,7 @@
             this.ClientSize = new System.Drawing.Size(800, 658);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnUpdate);
-            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.btnInsert);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.dataGridView1);
@@ -253,7 +254,7 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.Button btnLoad;
-        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnInsert;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnDelete;
     }
