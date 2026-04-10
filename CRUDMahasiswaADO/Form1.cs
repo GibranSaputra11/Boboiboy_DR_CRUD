@@ -15,7 +15,7 @@ namespace CRUDMahasiswaADO
     {
         private readonly SqlConnection conn;
         private readonly string connectionString =
-            "Data Source=gibran-laptop;Initial Catalog=DBAkademiADO;Integrated Security=True";
+            "Data Source=gibran-laptop;Initial Catalog=DBAkademikADO;Integrated Security=True";
         public Form1()
         {
             InitializeComponent();
