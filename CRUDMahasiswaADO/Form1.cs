@@ -71,12 +71,13 @@ namespace CRUDMahasiswaADO
                 dataGridView1.Rows.Clear();
                 dataGridView1.Columns.Clear();
 
-                dataGridView1.Rows.Add("NIM", "NIM");
-                dataGridView1.Rows.Add("Nama", "Nama");
-                dataGridView1.Rows.Add("JenisKelamin", "JenisKelamin");
-                dataGridView1.Rows.Add("TanggalLahir", "TanggalLahir");
-                dataGridView1.Rows.Add("Alamat", "Alamat");
-                dataGridView1.Rows.Add("KodeProdi", "KodeProdi");
+                // Tambahkan kolom secara eksplisit supaya rows.Add(...) menambahkan data pada kolom yang benar
+                dataGridView1.Columns.Add("NIM", "NIM");
+                dataGridView1.Columns.Add("Nama", "Nama");
+                dataGridView1.Columns.Add("JenisKelamin", "JenisKelamin");
+                dataGridView1.Columns.Add("TanggalLahir", "TanggalLahir");
+                dataGridView1.Columns.Add("Alamat", "Alamat");
+                dataGridView1.Columns.Add("KodeProdi", "KodeProdi");
 
                 string query = "SELECT * FROM Mahasiswa";
 
@@ -157,7 +158,7 @@ namespace CRUDMahasiswaADO
 
                 int result = cmd.ExecuteNonQuery();
 
-                if (result == 0)
+                if (result > 0)
                 {
                     MessageBox.Show("Data mahasiswa berhasil ditambahkan");
                     ClearForm();
@@ -203,7 +204,7 @@ namespace CRUDMahasiswaADO
 
                 int result = cmd.ExecuteNonQuery();
 
-                if (result == 0)
+                if (result > 0)
                 {
                     MessageBox.Show("Data mahasiswa berhasil diupdate");
                     ClearForm();
@@ -230,7 +231,7 @@ namespace CRUDMahasiswaADO
                 }
 
                 DialogResult resultConfirm = MessageBox.Show(
-                    "Yakin ining menghapus data?",
+                    "Yakin ingin menghapus data?",
                     "Konfirmasi",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
@@ -244,7 +245,7 @@ namespace CRUDMahasiswaADO
 
                     int result = cmd.ExecuteNonQuery();
 
-                    if (result == 0)
+                    if (result > 0)
                     {
                         MessageBox.Show("Data mahasiswa berhasil dihapus");
                         ClearForm();
