@@ -17,6 +17,23 @@ namespace CRUDMahasiswaADO
         private readonly string connectionString =
             "Data Source=gibran-laptop;Initial Catalog=DBAkademikADO;Integrated Security=True";
 
+        private void SimpanLog(string pesan)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"INSERT INTO LogError 
+                        VALUES(GETDATE(), @pesan)";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@pesan", pesan);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         private BindingSource bindingSource = new BindingSource();
         private DataTable dtMahasiswa = new DataTable();
 
@@ -325,6 +342,8 @@ namespace CRUDMahasiswaADO
                 MessageBox.Show("Gagal menghitung total: " + ex.Message);
             }
         }
+
+        
 
 
     }
