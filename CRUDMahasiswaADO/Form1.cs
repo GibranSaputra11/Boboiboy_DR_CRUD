@@ -128,9 +128,15 @@ namespace CRUDMahasiswaADO
                     }
                 }
             }
+            catch (SqlException ex)
+            {
+               SimpanLog(ex.Message);
+                MessageBox.Show("SQL Error : " + ex.Message);
+            }
             catch (Exception ex)
             {
-                MessageBox.Show("Gagal memasukkan data: " + ex.Message);
+                SimpanLog(ex.Message);
+                MessageBox.Show("General Error : " + ex.Message);
             }
         }
 
