@@ -302,23 +302,32 @@ namespace CRUDMahasiswaADO
 
         private void btnTestInjection_Click(object sender, EventArgs e)
         {
-            try
             {
-                conn.Open();
-
-                string query =
-                "UPDATE Mahasiswa SET Nama='HACKED' WHERE NIM='" +
-                txtNIM.Text + "'";
-
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                try
                 {
-                    int result = cmd.ExecuteNonQuery();
-                    MessageBox.Show(result + "beris terupdate");
+                    using (SqlConnection conn =
+                        new SqlConnection(connectionString))
+                    {
+                        string query =
+                        "UPDATE Mahasiswa SET Nama='" +
+                        txtNama.Text +
+                        "' WHERE NIM='" +
+                        txtNIM.Text + "'";
+
+                        SqlCommand cmd =
+                        new SqlCommand(query, conn);
+
+                        conn.Open();
+
+                        cmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Update berhasil");
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
