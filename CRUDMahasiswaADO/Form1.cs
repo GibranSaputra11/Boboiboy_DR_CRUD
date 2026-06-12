@@ -151,6 +151,13 @@ namespace CRUDMahasiswaADO
                 SimpanLog("GENERAL ERROR : " + ex.Message);
                 MessageBox.Show(ex.Message);
             }
+            finally
+            {
+                    if (conn.State == ConnectionState.Open)
+                    {
+                        conn.Close();
+                    }
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
