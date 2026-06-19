@@ -13,6 +13,7 @@ namespace CRUDMahasiswaADO
 {
     public partial class Form3 : Form
     {
+        DAL dbLogic = new DAL();
         static string connectionString = "Data Source=gibran-laptop;Initial Catalog=DBAkademikADO;Integrated Security=True";
         SqlConnection conn = new SqlConnection(connectionString);
         SqlDataAdapter da;
@@ -24,29 +25,24 @@ namespace CRUDMahasiswaADO
         public Form3(string Prodi, DateTime TglMasuk)
         {
             InitializeComponent();
+
             prodi = Prodi;
             tglmasuk = TglMasuk;
+
             try
             {
-                if (conn.State == ConnectionState.Closed)
-                {
-                    conn.Open();
-                }
-                SqlCommand cmd = new SqlCommand("sp_Report", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@inProdi", prodi);
-                cmd.Parameters.AddWithValue("@inTglMasuk", tglmasuk.Year);
-                da = new SqlDataAdapter(cmd);
-                dtMahasiswa = new DataTable();
-                da.Fill(dtMahasiswa);
-                conn.Close();
+                // Mengambil data dari database
+                DataTable dtMahasiswa = dbLogic.getDataRekap(prodi, tglmasuk);
+
+                // Mengatur data ke report dan menampilkannya di viewer
                 listMahasiswa.SetDataSource(dtMahasiswa);
                 crystalReportViewer1.ReportSource = listMahasiswa;
                 crystalReportViewer1.Refresh();
             }
             catch (Exception ex)
             {
-                //simpanLog(ex.Message);
+                // Penanganan error saat memuat laporan
+                // simpanLog(ex.Message);
                 MessageBox.Show("Gagal load data: " + ex.Message);
             }
         }

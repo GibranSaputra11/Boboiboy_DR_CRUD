@@ -67,11 +67,17 @@
             this.btnTestInjection = new System.Windows.Forms.Button();
             this.lblTotal = new System.Windows.Forms.Label();
             this.btnRekap = new System.Windows.Forms.Button();
+            this.fotoMhs = new System.Windows.Forms.PictureBox();
+            this.btnUpload = new System.Windows.Forms.Button();
+            this.btnImpExcel = new System.Windows.Forms.Button();
+            this.btnImpDb = new System.Windows.Forms.Button();
+            this.btnCari = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.mahasiswaBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dBAkademikADODataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fotoMhs)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -428,11 +434,66 @@
             this.btnRekap.UseVisualStyleBackColor = true;
             this.btnRekap.Click += new System.EventHandler(this.btnRekap_Click);
             // 
+            // fotoMhs
+            // 
+            this.fotoMhs.Location = new System.Drawing.Point(621, 199);
+            this.fotoMhs.Name = "fotoMhs";
+            this.fotoMhs.Size = new System.Drawing.Size(145, 107);
+            this.fotoMhs.TabIndex = 23;
+            this.fotoMhs.TabStop = false;
+            // 
+            // btnUpload
+            // 
+            this.btnUpload.Location = new System.Drawing.Point(621, 316);
+            this.btnUpload.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnUpload.Name = "btnUpload";
+            this.btnUpload.Size = new System.Drawing.Size(145, 28);
+            this.btnUpload.TabIndex = 24;
+            this.btnUpload.Text = "Upload Gambar";
+            this.btnUpload.UseVisualStyleBackColor = true;
+            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
+            // 
+            // btnImpExcel
+            // 
+            this.btnImpExcel.Location = new System.Drawing.Point(621, 66);
+            this.btnImpExcel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnImpExcel.Name = "btnImpExcel";
+            this.btnImpExcel.Size = new System.Drawing.Size(145, 54);
+            this.btnImpExcel.TabIndex = 25;
+            this.btnImpExcel.Text = "Import from Excel";
+            this.btnImpExcel.UseVisualStyleBackColor = true;
+            this.btnImpExcel.Click += new System.EventHandler(this.btnImpExcel_Click);
+            // 
+            // btnImpDb
+            // 
+            this.btnImpDb.Location = new System.Drawing.Point(621, 124);
+            this.btnImpDb.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnImpDb.Name = "btnImpDb";
+            this.btnImpDb.Size = new System.Drawing.Size(145, 54);
+            this.btnImpDb.TabIndex = 26;
+            this.btnImpDb.Text = "Import to Database";
+            this.btnImpDb.UseVisualStyleBackColor = true;
+            // 
+            // btnCari
+            // 
+            this.btnCari.Location = new System.Drawing.Point(340, 34);
+            this.btnCari.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCari.Name = "btnCari";
+            this.btnCari.Size = new System.Drawing.Size(72, 28);
+            this.btnCari.TabIndex = 27;
+            this.btnCari.Text = "Cari";
+            this.btnCari.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 658);
+            this.Controls.Add(this.btnCari);
+            this.Controls.Add(this.btnImpDb);
+            this.Controls.Add(this.btnImpExcel);
+            this.Controls.Add(this.btnUpload);
+            this.Controls.Add(this.fotoMhs);
             this.Controls.Add(this.btnRekap);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.btnTestInjection);
@@ -466,6 +527,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fotoMhs)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -510,6 +572,11 @@
         private System.Windows.Forms.Button btnTestInjection;
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Button btnRekap;
+        private System.Windows.Forms.PictureBox fotoMhs;
+        private System.Windows.Forms.Button btnUpload;
+        private System.Windows.Forms.Button btnImpExcel;
+        private System.Windows.Forms.Button btnImpDb;
+        private System.Windows.Forms.Button btnCari;
     }
 }
 
