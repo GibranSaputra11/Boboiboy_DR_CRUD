@@ -378,8 +378,11 @@ namespace CRUDMahasiswaADO
             }
         }
 
-        
-
-
+        private void btnRekap_Click(object sender, EventArgs e)
+        {
+            Form2 fm3 = new Form2();
+            fm3.Show();
+            this.Hide();
+        }
     }
 }
