@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace CRUDMahasiswaADO
 {
@@ -20,13 +21,16 @@ namespace CRUDMahasiswaADO
 
         public DAL()
         {
-            conn = new SqlConnection(connectionString);
+            // Call the method to get the connection string (not the method group)
+            conn = new SqlConnection(GetConnectionString());
         }
 
         public string GetConnectionString()
         {
+            string connectionString = $"Data Source={GetLocalIPAddress()};Initial Catalog=DBAkademikADO;User ID=sa;Password=12345678;";
             return connectionString;
         }
+
 
         public int CountMhs()
         {
@@ -38,7 +42,7 @@ namespace CRUDMahasiswaADO
             SqlCommand cmd = new SqlCommand("sp_CountMahasiswa", conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            SqlParameter outputParam = new SqlParameter("@pCount", SqlDbType.Int);
+            SqlParameter outputParam = new SqlParameter("@Total", SqlDbType.Int);
             outputParam.Direction = ParameterDirection.Output;
 
             cmd.Parameters.Add(outputParam);
@@ -72,26 +76,34 @@ namespace CRUDMahasiswaADO
             {
                 conn.Open();
             }
+
             SqlTransaction trans = conn.BeginTransaction();
             try
             {
                 SqlCommand command = new SqlCommand("sp_InsertMahasiswa", conn);
                 command.CommandType = CommandType.StoredProcedure;
 
+                // PENTING: Kaitkan command dengan transaksi yang sedang berjalan
+                command.Transaction = trans;
+
                 command.Parameters.AddWithValue("pNIM", nim);
                 command.Parameters.AddWithValue("pNama", nama);
                 command.Parameters.AddWithValue("pAlamat", alamat);
                 command.Parameters.AddWithValue("pTanggalLahir", tanggalLahir);
                 command.Parameters.AddWithValue("pJenisKelamin", jenisKelamin);
-                command.Parameters.AddWithValue("pNmProdi", kodeProdi); 
-                command.Parameters.AddWithValue("pFoto", foto);
+                command.Parameters.AddWithValue("pKodeProdi", kodeProdi);
+                command.Parameters.Add("@pFoto", SqlDbType.VarBinary).Value = (object)foto ?? DBNull.Value;
 
                 command.ExecuteNonQuery();
+
+                // Sekarang commit akan benar-benar menyimpan perubahan
                 trans.Commit();
             }
             catch (Exception ex)
             {
                 trans.Rollback();
+                // Penting: Jangan menelan error, lempar kembali agar UI tahu ada yang gagal
+                throw ex;
             }
             finally
             {
@@ -113,7 +125,7 @@ namespace CRUDMahasiswaADO
             command.Parameters.AddWithValue("pAlamat", alamat);
             command.Parameters.AddWithValue("pJenisKelamin", jenisKelamin);
             command.Parameters.AddWithValue("pTanggalLahir", tanggalLahir);
-            command.Parameters.AddWithValue("pNmProdi", kodeProdi);
+            command.Parameters.AddWithValue("pKodeProdi", kodeProdi);
             command.Parameters.AddWithValue("pFoto", foto);
 
             command.CommandType = CommandType.StoredProcedure;
@@ -129,7 +141,7 @@ namespace CRUDMahasiswaADO
             }
 
             SqlCommand cmd = new SqlCommand("sp_DeleteMahasiswa", conn);
-            cmd.Parameters.AddWithValue("pNIM", nim);
+            cmd.Parameters.AddWithValue("NIM", nim);
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.ExecuteNonQuery();
@@ -193,7 +205,7 @@ namespace CRUDMahasiswaADO
 
             SqlCommand cmd = new SqlCommand("sp_LogMessage", conn);
 
-            cmd.Parameters.AddWithValue("psn", message);
+            cmd.Parameters.AddWithValue("pesan", message);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.ExecuteNonQuery();
         }
@@ -226,7 +238,7 @@ namespace CRUDMahasiswaADO
             cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("@inProdi", prodi);
-            cmd.Parameters.AddWithValue("@intTglMsuk", tanggalMasuk.Year.ToString());
+            cmd.Parameters.AddWithValue("@inTglMasuk", tanggalMasuk.Year.ToString());
 
             da = new SqlDataAdapter(cmd);
             dtMahasiswa = new DataTable();
@@ -269,6 +281,28 @@ namespace CRUDMahasiswaADO
             da.Fill(dtMahasiswa);
 
             return dtMahasiswa;
+        }
+
+        public static string GetLocalIPAddress()
+        {
+            string localIP = string.Empty;
+            try
+            {
+                var host = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
+                foreach (var ip in host.AddressList)
+                {
+                    if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                    {
+                        localIP = ip.ToString();
+                        break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error getting local IP address: " + ex.Message);
+            }
+            return localIP;
         }
     }
 }

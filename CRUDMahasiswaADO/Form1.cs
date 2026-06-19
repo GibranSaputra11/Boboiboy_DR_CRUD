@@ -198,16 +198,18 @@ namespace CRUDMahasiswaADO
             {
                 DataRow row = ((DataRowView)bindingSource[e.RowIndex]).Row;
 
-                txtNIM.Text = row[0].ToString();
-                txtNama.Text = row[1].ToString();
-                cmbJK.Text = row[2].ToString();
-                dtpTanggalLahir.Value = Convert.ToDateTime(row[3]);
-                txtAlamat.Text = row[4].ToString();
-                txtKodeProdi.Text = row[6].ToString();
+                txtNIM.Text = row["NIM"].ToString();
+                txtNama.Text = row["Nama"].ToString();
+                cmbJK.Text = row["JenisKelamin"].ToString();
+                dtpTanggalLahir.Value = Convert.ToDateTime(row["TanggalLahir"]);
+                txtAlamat.Text = row["Alamat"].ToString();
 
-                if (row[5] != DBNull.Value)
+                txtKodeProdi.Text = row["KodeProdi"].ToString();
+
+                // Logika untuk Foto tetap sama
+                if (row["Foto"] != DBNull.Value)
                 {
-                    byte[] imgBytes = (byte[])row[5];
+                    byte[] imgBytes = (byte[])row["Foto"];
                     using (MemoryStream ms = new MemoryStream(imgBytes))
                     {
                         fotoMhs.Image = Image.FromStream(ms);
@@ -246,8 +248,13 @@ namespace CRUDMahasiswaADO
         {
             try
             {
-                bindingSource.DataSource = dbLogic.GetMhs();
-                dataGridView1.DataSource = bindingSource;
+                DataTable dt = dbLogic.GetMhs();
+                bindingSource.DataSource = dt;                 
+                dataGridView1.DataSource = bindingSource;     
+                BindControls();
+
+
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
 
                 if (dataGridView1.Columns.Contains("Foto"))
                 {
@@ -406,7 +413,15 @@ namespace CRUDMahasiswaADO
         {
             try
             {
-                DataTable dt = (DataTable)dataGridView1.DataSource;
+                DataTable dt = null;
+                if (dataGridView1.DataSource is BindingSource bs && bs.DataSource is DataTable)
+                {
+                    dt = (DataTable)bs.DataSource;
+                }
+                else if (dataGridView1.DataSource is DataTable dataTable)
+                {
+                    dt = dataTable;
+                }
 
                 if (dt == null || dt.Rows.Count == 0)
                 {
@@ -447,6 +462,15 @@ namespace CRUDMahasiswaADO
                 }
 
                 MessageBox.Show("Data mahasiswa berhasil ditambahkan. Total berhasil: " + sukses);
+
+                btnInsert.Enabled = true;
+                btnUpdate.Enabled = true;
+                btnDelete.Enabled = true;
+                btnCari.Enabled = true;
+                btnLoad.Enabled = true;
+                btnResetData.Enabled = true;
+                btnTestInjection.Enabled = true;
+
                 ClearForm();
                 LoadData();
             }
